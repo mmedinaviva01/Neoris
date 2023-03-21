@@ -1,0 +1,27 @@
+version: '3'
+
+services:
+  neoris-app:
+    image: neoris-app:latest
+    restart: always
+    build:
+      context: .
+    container_name: neoris-app
+    depends_on:
+      - neoris-db
+    environment:
+      MYSQL_HOST: neoris-db
+      MYSQL_USER: root
+      MYSQL_PASSWORD: Sql123456
+      MYSQL_PORT: 3306
+    ports:
+      - 8080:8080
+      
+  neoris-db:
+    image: mysql
+    container_name: neoris-db
+    ports:
+      - 3306:3306
+    environment:
+      MYSQL_DATABASE: bank
+      MYSQL_ROOT_PASSWORD: Sql123456
